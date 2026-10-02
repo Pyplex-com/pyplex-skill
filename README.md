@@ -30,8 +30,8 @@ Talk in your own words. Your assistant picks the model, writes the prompt and sh
 
 1. **Ask** for what you want.
 2. Your assistant **picks a model** and writes the prompt for you.
-3. You see the **exact price** — nothing is charged yet.
-4. Say **yes** (or press **Generate** on the Pyplex card).
+3. You see the **exact price** — nothing is charged yet. For a bigger job, like a whole video, you see **one plan** with every paid step, its price and the total.
+4. Say **yes** once (or press **Generate** on the Pyplex card). For a plan, that one yes covers every step on it — the assistant doesn't keep asking.
 5. The result appears **in the chat** and is saved in your **Pyplex Library**.
 
 ## Install
@@ -83,7 +83,7 @@ You sign in once, when you add it — the app stays connected.
 
 - You sign in to Pyplex and press **Allow** once, when you add the connector. You can disconnect any time from your Pyplex **Dashboard → Connected apps**.
 - Looking up models, prices, templates and docs is free.
-- Every generation is two steps: a free price check, then your **yes**. Nothing is charged without it.
+- Nothing is charged without your **yes**: for one thing, after a free price check; for a whole video, one yes to a plan that lists every paid step and the total. Anything not on that plan, or a higher price, needs a new yes.
 - If your balance is low, you get a link to add money on Pyplex (minimum top-up $10). Failed generations are refunded automatically.
 - Putting clips together into one video is free. Exporting the finished video in the Pyplex editor costs a small fee from your balance, shown before you export.
 

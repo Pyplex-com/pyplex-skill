@@ -27,6 +27,7 @@ Run through this before you send the Open in Editor link. Fix whatever fails —
 - [ ] Music sits under the voice (0.15–0.3); the clips are muted where their own sound would clash.
 
 **Hand-over**
+- [ ] You spent no more than the approved total. Say what was spent.
 - [ ] Say what you made in two or three lines: the length, the shape, the idea.
 - [ ] Name what they may want to adjust in the editor (a caption's timing, where the music starts).
 - [ ] Mention the export price from the result.

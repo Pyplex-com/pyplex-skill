@@ -26,6 +26,6 @@ Ideas that suit the one-photo rule:
 
 ## Build it with the AI
 
-1. Make each step with the creator's own sample photo: `request_upload_link` → an edit or image-to-video model → quote → yes → start.
+1. Make each step with the creator's own sample photo: `request_upload_link` → one plan listing every step's model and price, and the total → one yes → quote and start each step.
 2. `create_video_edit` with those generations ("generation:<id>"), the music and the text.
 3. Give the creator the Open in Editor link and tell them: watch it, then press **Publish template** next to Export, name each step, choose for each input whether the user gives it, and set the fee.

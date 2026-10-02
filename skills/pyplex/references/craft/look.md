@@ -17,7 +17,7 @@ It names the light (soft daylight, golden hour, neon night, studio softbox), the
 3. Repeat the same short description in every prompt — "the same woman from the reference photo: shoulder-length black hair, round glasses, mustard kurta" — and say "keep her face exactly the same".
 4. Keep the outfit unless the story changes it.
 5. Animate those keyframes with image-to-video. For a text-to-video shot, give the person's photos as `reference_images` to `bytedance/seedance-2.5/text-to-video` (up to 30).
-6. Check the face after every step. If it drifts, redo that shot — don't build on it.
+6. Check the face after every step. If it drifts, don't build on it — ask to redo that shot (a redo is new money).
 
 The same method works for a product (same reference angle, colour and label), a pet or a place.
 

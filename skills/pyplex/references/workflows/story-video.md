@@ -10,10 +10,10 @@ Read first: [story](../craft/story.md), [shots](../craft/shots.md), [look](../cr
 - The story shape: setup → something changes → it gets harder → the turn → payoff. Six to twelve shots.
 - One short narration or caption line per beat — or no words at all, just music.
 
-## 2. Build the character, and get a yes on the look
+## 2. Build the character first
 
-1. A character sheet: one full-body image of the character on a plain background, in the look you chose — `bytedance/seedream-v5.0-pro` or `google/nano-banana-pro/text-to-image`. Or start from the user's own photo.
-2. Show it and adjust until the user likes it. This image is the reference for everything after it.
+1. A character sheet: one full-body image of the character on a plain background, in the look you chose — `bytedance/seedream-v5.0-pro` or `google/nano-banana-pro/text-to-image`. Or start from the user's own photo. This image is the reference for everything after it.
+2. Put it in the plan as the first item. In the same message, ask: "I'll make the character first — want to see it before I make the rest?" If they want to, show it and wait; otherwise carry on with the whole plan under the same yes.
 3. Write the character line you'll repeat in every prompt: "Mintu, a small orange cat with a white chest and a blue collar".
 
 ## 3. Keyframes, then motion

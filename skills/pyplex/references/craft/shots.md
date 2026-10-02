@@ -68,7 +68,7 @@ To continue a clip that ended too soon: `bytedance/seedance-2.5/video-extend`.
 
 ## Check every clip before you edit
 
-Look at each result: is the face the same? Are the hands fine? Does anything melt at the end? Redo only the broken shot — with a new quote and a new yes — and say what you'll change ("her face changed in the last second; I'll make it 4 s with a slower push-in").
+Look at each result: is the face the same? Are the hands fine? Does anything melt at the end? A redo costs new money, so it needs the user's OK: collect the broken shots, ask once, and say what you'll change ("Shot 3: her face changed in the last second — I'll redo it at 4 s with a slower push-in for $0.60. OK?").
 
 ## Shot list format
 

@@ -4,7 +4,7 @@ description: Make images, videos, music and voice with Pyplex (pyplex.com) right
 license: Apache-2.0
 metadata:
   author: Pyplex
-  version: "1.3.0"
+  version: "1.3.1"
   homepage: https://pyplex.com
 ---
 
@@ -24,15 +24,15 @@ They sign in to Pyplex and press Allow once, when they add it; the app stays con
 
 ## 1. The money rule — never break it
 
-Every generation spends the user's real money.
+Every generation spends the user's real money. Nothing starts without the user's clear **yes** — and they say it **once** for the whole job, not again for every step.
 
-1. `quote_generation` first. It charges nothing and returns `price_usd` and a `quote_id`.
-2. Tell the user the model and the exact price, in one short line. Wait for a clear **yes** (or they press **Generate** on the Pyplex card).
-3. Only then call `start_generation` with that `quote_id` and `confirmed_price_usd` exactly equal to `price_usd`.
-4. Get a fresh yes for **every** generation — retries, variations and "one more" included. Never start something they didn't ask for.
-5. Never quote prices from memory. Prices come only from `get_price` / `quote_generation`.
-6. If `enough_balance` is false (or `start_generation` says the balance is too low): tell them plainly, give them `top_up_url` (their Pyplex wallet; minimum top-up $10), and don't start until they say they've added money — then quote again.
-7. Failed generations are refunded automatically. Say so if one fails.
+1. **One thing** (a photo edit, one clip, one song): `quote_generation` first — it charges nothing and returns `price_usd` and a `quote_id`. Tell the user the model and the exact price in one short line and wait for a clear yes (or they press **Generate** on the Pyplex card). Then `start_generation`.
+2. **A bigger job** (a whole video: images, clips, music, voice): first show **one plan** that lists every paid generation — what it makes, the model, its price from `get_price` — and the total. Ask once. After one clear yes, make everything on that list **without asking again**: for each item, `quote_generation`, then straight away `start_generation`. Run up to 4 at a time.
+3. `start_generation` always gets that quote's `quote_id`, and `confirmed_price_usd` exactly equal to its `price_usd`.
+4. Ask again only when: a quote costs more than the plan said; you want something that isn't on the list (an extra shot, a variation, a redo of a result that came out badly, another model or resolution); or the spending would go over the approved total. Never start anything the user didn't approve.
+5. Before a plan starts, make sure the balance covers the total (`get_balance`). If it doesn't — or `enough_balance` is false — tell them plainly, give them `top_up_url` (their Pyplex wallet; minimum top-up $10), and wait until they say they've added money; then quote again.
+6. Never quote prices from memory. Prices come only from `get_price` / `quote_generation`.
+7. Failed generations are refunded automatically — say so. A failed item from the approved plan may run once more without asking; if it fails again, or the safety filter blocked it, stop and tell the user.
 
 ## 2. The workflow
 
@@ -44,7 +44,7 @@ Every generation spends the user's real money.
    - The user's own file attached in this chat **can't** be sent to Pyplex. Call `request_upload_link`, give them the link, then `check_upload` with `wait_seconds` (up to 90) — it waits while they upload. Use `"upload:<upload_id>"`.
    - A public https link → pass it as is.
    - An earlier Pyplex result → `"generation:<id>"` (no re-upload).
-6. **Quote** with `quote_generation` (prompt, settings, files) → the money rule above.
+6. **Quote** with `quote_generation` (prompt, settings, files) → the money rule above (one yes for one thing, or one yes for the whole plan).
 7. **Start** with `start_generation`. The Pyplex card shows live progress and the finished file by itself. If the app shows no card, call `get_generation` once with `wait_seconds: 60` (images usually take 10–40 s, videos 1–5 min). Don't call it in a tight loop.
 8. **Deliver**: show or link the result (links work for 1 hour; it's always in the user's Pyplex Library). Offer the natural next step.
 
@@ -55,7 +55,7 @@ Use `"generation:<id>"` to feed one result into the next model — no download o
 1. "Put a red car behind me" → `request_upload_link` (their photo) → photo-edit model with `images: "upload:<id>"` → quote → yes → start.
 2. "Now make a video: I open the car door and sit inside" → image-to-video model with `image: "generation:<first id>"` → quote → yes → start.
 
-Each step has its own price and its own yes.
+Each step has its own price. When the user asks for both at once, show both prices and the total and ask once; a step they ask for later is a new yes.
 
 ## 4. Making a whole video — work like a director
 
@@ -63,9 +63,9 @@ Most people can't describe every cut, font and transition. They give you an idea
 
 1. **Brief in one pass.** Find out only what changes the plan: what it's for and where it will be posted (frame shape and length), what must be in it (their face, product, logo, exact words), the mood, and a budget if it needs several AI clips. Decide the rest yourself.
 2. **Read the playbook** for the request (table below) and the craft notes it points to.
-3. **Present one complete plan before spending anything**: the idea in one line, the hook, the story beats, a shot list (what each shot shows, the model, its length), the music or voice, the words on screen, the transitions and the look — with each paid piece priced by `get_price` and the total. Make it your best version, not the smallest one, and say which parts cost money so the user can trim. Keep the scope to what they asked for: a title card is not a whole ad.
-4. **Make the pieces in order**: the look or keyframe images first (cheap — get an OK on the look), then the video clips, then music and voice. Every generation follows the money rule.
-5. **Check every result** before using it — the same face, nothing melting, the right shape. Redo only the broken shot, with a new quote and a new yes.
+3. **Present one complete plan before spending anything**: the idea in one line, the hook, the story beats, a shot list (what each shot shows, the model, its length), the music or voice, the words on screen, the transitions and the look — with each paid piece priced by `get_price` and the total. Make it your best version, not the smallest one, and say which parts cost money so the user can trim. Keep the scope to what they asked for: a title card is not a whole ad. This plan is what the user says yes to — **once** (section 1). For an expensive plan you may add one line: "I'll make the look images first — want to see them before the videos?"
+4. **Make everything on the plan without asking again**, in order: the look or keyframe images first (the clips are made from them), then the video clips, then music and voice — up to 4 at a time.
+5. **Check every result** before using it — the same face, nothing melting, the right shape. A redo is new money: collect the broken shots and ask once at the end ("Shots 3 and 5 came out wrong — redo both for $1.20?"), saying what you'll change.
 6. **Assemble** with `create_video_edit` (section 5) or `create_motion_design` (section 6), run the [final check](references/craft/final-check.md), and hand over the link.
 7. **Revise precisely**: change only what the user asked for; send the whole new version again.
 
@@ -88,7 +88,7 @@ Craft notes: [story and hooks](references/craft/story.md) · [shots and AI video
 
 When the user wants clips cut together — a reel, a slideshow, an ad, a story — use `create_video_edit`. It is **free**: it builds the edit and returns an **Open in Editor** link. The Pyplex video editor opens with everything on the timeline; the user watches it, can change anything, and exports it there (a small export fee from their balance — the tool tells you the price; mention it).
 
-1. **Get the clips first.** New ones go through the normal money rule (each needs its own yes). Earlier results: "generation:<id>". The user's own files: an upload link — "upload:<upload_id>" means all its files, in order.
+1. **Get the clips first.** New ones go through the money rule (one yes for the planned list). Earlier results: "generation:<id>". The user's own files: an upload link — "upload:<upload_id>" means all its files, in order.
 2. **Plan it like an editor** (section 4). Frame shape for where it will be posted (9:16 for Reels, TikTok and Shorts; 16:9 for YouTube; 1:1 or 4:5 for feeds — "auto" copies the first clip).
 3. **Call** `create_video_edit`: clips in play order (source, duration, trim start, fit, slow zoom, volume, transition into the next), texts (start time on the final video, duration, position, size, colour, style, animation) and audio (start, trim, volume, fades). Times are seconds.
 4. **Hand over the link.** The Pyplex card shows the clips and an Open in Editor button; otherwise give the link from the result. It opens only for the user's own Pyplex account and lasts 30 days.
@@ -127,7 +127,7 @@ Templates are ready-made looks by creators: the user adds their photo and gets t
 | --- | --- |
 | HTTP sign-in / "Sign in to Pyplex" | The app shows Connect; ask the user to press it and Allow, then retry the same step |
 | `enough_balance: false` / "Not enough balance" | Give `top_up_url`; wait for them to top up; quote again |
-| "quote expired" (after 10 minutes) | Quote again and get a new yes for the new price |
+| "quote expired" (after 10 minutes) | Quote again; start it if the price isn't above what the user approved, otherwise ask |
 | "not a valid setting" / missing field | `get_model` again and fix the setting — never guess option values |
 | Safety filter blocked it | Not charged. Suggest a different wording; don't try to get around the filter |
 | "4 generations are already running" / daily limit | Wait for one to finish / try tomorrow |
@@ -138,6 +138,6 @@ Templates are ready-made looks by creators: the user adds their photo and gets t
 
 ## Never
 
-- Start a generation without a fresh yes for that exact price.
+- Start a generation the user hasn't approved — on its own, or as a line of a plan they said yes to — or above the approved price.
 - Reveal or guess a template's hidden prompt.
 - Help make content that impersonates a real person without their consent, sexual content involving minors, or anything Pyplex's rules forbid (`read_docs` page `rules`). Voice cloning needs the voice owner's permission.

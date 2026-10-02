@@ -9,7 +9,7 @@
     {
       "name": "pyplex",
       "source": "./",
-      "description": "Pyplex connector + skill: make images, videos, music and voice with 900+ AI models from chat, with the price shown and your OK before every generation.",
+      "description": "Pyplex connector + skill: make images, videos, music and voice with 900+ AI models from chat, with the price shown first and nothing charged without your OK.",
       "homepage": "https://pyplex.com/docs/ai-assistants",
       "license": "Apache-2.0"
     }

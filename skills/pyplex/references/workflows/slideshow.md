@@ -25,7 +25,7 @@ You usually can't see what's in the uploaded photos. If you can't, keep the uplo
 - Music: their song (upload, kind "audio") or a new instrumental from `elevenlabs/music-v2.5`, 2 s longer than the slideshow, with a 2-second `fade_out`.
 - Text: a title at the start ("Happy 30th, Riya"), places or dates as `small` labels, a closing line on the last photo — with `fade` or `rise`.
 
-## 4. Optional AI touches — each with its own price and yes
+## 4. Optional AI touches — they cost money, so list them in the plan with their prices
 
 - Bring one or two key photos to life with `bytedance/seedance-2.5/image-to-video` and a subtle movement.
 - Sharpen a blurry old photo with `clarity-ai/crystal-upscaler`.

@@ -21,11 +21,11 @@ Ask only what you can't decide: what it's for (sell, show, entertain), what must
 ## 3. Make the pieces
 
 1. Their photos and clips: `request_upload_link` (kind "any", up to 10 files) → `check_upload`.
-2. Keyframe images in 9:16 — cheap; show them and get an OK on the look.
+2. Keyframe images in 9:16 first — cheap, and the clips are made from them.
 3. Animate the keyframes with `bytedance/seedance-2.5/image-to-video`, 4–5 s each, with the camera moves from the shot list.
 4. Music: `elevenlabs/music-v2.5` with `force_instrumental` on and the length set to the video plus 2–3 s.
 
-Every generation: quote → yes → start.
+The user's one yes to the plan covers all of these: quote each one and start it straight away, without asking again (the money rule in SKILL.md).
 
 ## 4. Build the edit
 
