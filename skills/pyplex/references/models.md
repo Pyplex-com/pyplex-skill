@@ -35,15 +35,16 @@ Match the **task** first, then quality vs. speed:
 | Task | Good starting points |
 | --- | --- |
 | Animate a photo (image → video) | `kwaivgi/kling-v3.0-pro/image-to-video`, `google/veo3.1/image-to-video`, `bytedance/seedance-2.0/image-to-video`, `minimax/hailuo-2.3/i2v-pro`, `openai/sora-2/image-to-video` |
-| Cheaper image → video drafts | `google/veo3.1-fast/image-to-video`, `kwaivgi/kling-v3.0-std/image-to-video`, `minimax/hailuo-2.3/i2v-standard` |
-| Video from text only | `google/veo3.1/text-to-video`, `kwaivgi/kling-v3.0-pro/text-to-video`, `bytedance/seedance-2.0/text-to-video`, `openai/sora-2/text-to-video` |
+| Cheaper image → video drafts | `bytedance/seedance-2.5/image-to-video-turbo`, `google/veo3.1-fast/image-to-video`, `kwaivgi/kling-v3.0-std/image-to-video`, `minimax/hailuo-2.3/i2v-standard` |
+| Video from text only | `google/veo3.1/text-to-video`, `kwaivgi/kling-v3.0-pro/text-to-video`, `bytedance/seedance-2.0/text-to-video`, `openai/sora-2/text-to-video`, `bytedance/seedance-2.5/text-to-video-turbo` (cheaper drafts) |
+| Follow the motion or style of a reference video, keep a person from photos | `bytedance/seedance-2.5/text-to-video` (`reference_videos`, `reference_images`) |
 | Make a clip longer | `google/veo3.1/video-extend`, `bytedance/seedance-2.0/video-extend` |
 | Edit an existing video | `bytedance/seedance-2.0/video-edit` |
 | Copy a movement onto a person | `kwaivgi/kling-v3.0-pro/motion-control` |
 | Upscale a video | `clarity-ai/crystal-video-upscaler` |
 | Remove a video's background | `hosted/video-background-remover` |
 
-Video price depends on length and resolution — quote before promising anything. Start and end frames: some image-to-video models take an `end_image`; check `get_model`.
+Video price depends on length and resolution — quote before promising anything. Start and end frames: Seedance 2.5 and Veo 3.1 take a `last_image`, Kling takes an `end_image`; check `get_model`.
 
 ## Audio
 
@@ -52,6 +53,8 @@ Video price depends on length and resolution — quote before promising anything
 | Speech / voice-over from text | `elevenlabs/eleven-v3`, `elevenlabs/multilingual-v2` (many languages), `elevenlabs/flash-v2.5` (fast) |
 | Music from a description | `elevenlabs/music-v2.5`, `google/lyria-3-pro/music`, `hosted/ace-step-1.5` |
 | Change or continue a song | `hosted/ace-step/audio-to-audio`, `hosted/ace-step/audio-outpaint` |
+| Sound effects from a description | `mirelo-ai/sfx-1.6/text-to-audio`, `sonilo/v1/text-to-sfx` |
+| Matching sound for a silent video | `hosted/mmaudio-v2`, `mirelo-ai/sfx-1.6/video-to-video`, `kwaivgi/kling-video-to-audio` |
 
 Voice cloning models exist — only with the voice owner's permission (Pyplex rules).
 

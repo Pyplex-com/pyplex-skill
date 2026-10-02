@@ -7,7 +7,7 @@ Use this when someone asks how to earn on Pyplex or how templates work. For full
 - **Photo templates**: a creator picks an AI model, writes a hidden prompt and fixed settings, and asks users for one or more photos. Users add their photo, see the price and get the result.
 - **Video templates**: built in the Pyplex Editor. Each AI clip in the timeline becomes a step; users remake each step with their own photo, then Pyplex assembles the final video in their browser.
 - Prompts stay private. Templates are reviewed before they go public.
-- Templates are created and published on pyplex.com (not through chat).
+- Templates are created and published on pyplex.com (not through chat). You can build a video template's edit for a creator from chat — they publish it from the editor; see [video-template](workflows/video-template.md).
 
 ## Money
 

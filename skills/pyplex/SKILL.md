@@ -1,10 +1,10 @@
 ---
 name: pyplex
-description: Make images, videos, music and voice with Pyplex (pyplex.com) right from the chat — pick the right AI model, write the prompt, show the exact price, and spend the user's Pyplex balance only after they say yes — edit several clips into one finished video (order, cuts, text, music, transitions) that opens in the Pyplex video editor, and make animated motion graphics (titles, ads, lower thirds, logo reveals) in Pyplex Motion Design. Use when the user mentions Pyplex, wants to create or edit a photo, turn a photo into a video, chain one result into the next, cut clips into a reel, slideshow or ad, make an animated title or motion graphic, make music or speech, use or find a Pyplex template, check their Pyplex balance or past generations, or asks how creators earn on Pyplex.
+description: Make images, videos, music and voice with Pyplex (pyplex.com) right from the chat — pick the right AI model, write the prompt, show the exact price, and spend the user's Pyplex balance only after they say yes. Direct whole videos like a professional editor (story, shots, music, text, transitions), cut the clips into one finished video that opens in the Pyplex video editor, and make animated motion graphics (titles, ads, lower thirds, logo reveals) in Pyplex Motion Design. Use when the user mentions Pyplex, wants to create or edit a photo, turn a photo into a video, make a Reel, ad, short story, music video, explainer or slideshow, recreate a video they like, chain one result into the next, make an animated title, make music or speech, use or find a Pyplex template, check their Pyplex balance or past generations, or asks how creators earn on Pyplex.
 license: Apache-2.0
 metadata:
   author: Pyplex
-  version: "1.2.4"
+  version: "1.3.0"
   homepage: https://pyplex.com
 ---
 
@@ -57,40 +57,71 @@ Use `"generation:<id>"` to feed one result into the next model — no download o
 
 Each step has its own price and its own yes.
 
-## 4. Edit clips into one finished video
+## 4. Making a whole video — work like a director
+
+Most people can't describe every cut, font and transition. They give you an idea — "a Reel for my café", "turn my photo into a movie scene", "a video like this one" — and expect a finished, well-made video. Plan and build it the way a good director and editor would:
+
+1. **Brief in one pass.** Find out only what changes the plan: what it's for and where it will be posted (frame shape and length), what must be in it (their face, product, logo, exact words), the mood, and a budget if it needs several AI clips. Decide the rest yourself.
+2. **Read the playbook** for the request (table below) and the craft notes it points to.
+3. **Present one complete plan before spending anything**: the idea in one line, the hook, the story beats, a shot list (what each shot shows, the model, its length), the music or voice, the words on screen, the transitions and the look — with each paid piece priced by `get_price` and the total. Make it your best version, not the smallest one, and say which parts cost money so the user can trim. Keep the scope to what they asked for: a title card is not a whole ad.
+4. **Make the pieces in order**: the look or keyframe images first (cheap — get an OK on the look), then the video clips, then music and voice. Every generation follows the money rule.
+5. **Check every result** before using it — the same face, nothing melting, the right shape. Redo only the broken shot, with a new quote and a new yes.
+6. **Assemble** with `create_video_edit` (section 5) or `create_motion_design` (section 6), run the [final check](references/craft/final-check.md), and hand over the link.
+7. **Revise precisely**: change only what the user asked for; send the whole new version again.
+
+| The user wants… | Playbook |
+| --- | --- |
+| A Reel, TikTok or Short — from an idea or their photos | [reel](references/workflows/reel.md) |
+| A product ad or promo | [product-ad](references/workflows/product-ad.md) |
+| "Make a video like this one" | [recreate-a-video](references/workflows/recreate-a-video.md) |
+| One photo turned into a movie-like clip | [photo-to-video](references/workflows/photo-to-video.md) |
+| A short story with the same character in every shot | [story-video](references/workflows/story-video.md) |
+| A video cut to music (montage, travel, event, lyrics) | [music-video](references/workflows/music-video.md) |
+| An explainer, how-to, tips or list video | [explainer](references/workflows/explainer.md) |
+| A slideshow of their photos (birthday, wedding, trip) | [slideshow](references/workflows/slideshow.md) |
+| A title, lower third, logo reveal, stat or end card | [motion-graphics](references/craft/motion-graphics.md) |
+| A video template for other Pyplex users | [video-template](references/workflows/video-template.md) |
+
+Craft notes: [story and hooks](references/craft/story.md) · [shots and AI video prompts](references/craft/shots.md) · [pacing and cuts](references/craft/pacing.md) · [transitions](references/craft/transitions.md) · [text and captions](references/craft/text.md) · [music, voice and sound](references/craft/sound.md) · [look and consistency](references/craft/look.md) · [motion graphics](references/craft/motion-graphics.md) · [final check](references/craft/final-check.md)
+
+## 5. Edit clips into one finished video
 
 When the user wants clips cut together — a reel, a slideshow, an ad, a story — use `create_video_edit`. It is **free**: it builds the edit and returns an **Open in Editor** link. The Pyplex video editor opens with everything on the timeline; the user watches it, can change anything, and exports it there (a small export fee from their balance — the tool tells you the price; mention it).
 
 1. **Get the clips first.** New ones go through the normal money rule (each needs its own yes). Earlier results: "generation:<id>". The user's own files: an upload link — "upload:<upload_id>" means all its files, in order.
-2. **Plan it like an editor.** Frame shape for where it will be posted (9:16 for Reels, TikTok and Shorts; 16:9 for YouTube; 1:1 or 4:5 for feeds — "auto" copies the first clip). Photos 2–4 seconds each. Trim videos to the best part. Short, readable text — one line at a time, big enough to read on a phone. Music under everything, with a gentle fade out.
-3. **Call** `create_video_edit`: clips in play order (source, duration, trim start, fit, slow zoom, transition into the next), texts (start time on the final video, position, size, colour, style, animation) and audio (start, volume, fades). Times are seconds.
+2. **Plan it like an editor** (section 4). Frame shape for where it will be posted (9:16 for Reels, TikTok and Shorts; 16:9 for YouTube; 1:1 or 4:5 for feeds — "auto" copies the first clip).
+3. **Call** `create_video_edit`: clips in play order (source, duration, trim start, fit, slow zoom, volume, transition into the next), texts (start time on the final video, duration, position, size, colour, style, animation) and audio (start, trim, volume, fades). Times are seconds.
 4. **Hand over the link.** The Pyplex card shows the clips and an Open in Editor button; otherwise give the link from the result. It opens only for the user's own Pyplex account and lasts 30 days.
 5. **Changes?** Call `create_video_edit` again with the whole new version — each call makes a new link. Don't ask the user to rebuild it by hand.
 
-Tips: a slow zoom (zoom in or out) makes still photos feel alive. Clips of a different shape: fit "contain" with background "blur" shows all of the clip without black bars. AI videos often have no useful sound — set their volume to 0 when music plays. Transitions: crossfade for calm, dipToBlack between scenes; for a modern, polished look use zoomBlur or whipPan for energy, lensDefocus or noiseDissolve for soft cuts, cube or doorway for a 3D reveal, overexposure or rgbGlitch for punch. Pick one or two styles per video and keep them under a second. Total length up to 5 minutes.
+**Limits:** up to 30 clips, 30 texts (150 characters each) and 5 audio tracks; 5 minutes in total; a photo stays 3 seconds unless you set its `duration`; transitions last 0.2–2 seconds.
 
-## 5. Motion graphics
+Quick tips: a slow zoom (`zoom_in` / `zoom_out`) makes photos feel alive; clips of a different shape look best with `fit` "contain" and the blurred background; set AI clips' `volume` to 0 when music plays; pick one or two transition styles and keep them short ([transitions](references/craft/transitions.md)); short text, timed to the picture ([text](references/craft/text.md)).
 
-For animated graphics — a title card, product ad, lower third, logo reveal, social-media hook, end screen — use `create_motion_design`. Free; it returns an **Open in Motion Design** link and the user exports there (small fee from their balance, shown in the result).
+## 6. Motion graphics
+
+For animated graphics — a title card, product ad, lower third, logo reveal, social-media hook, stat or end screen — use `create_motion_design`. Free; it returns an **Open in Motion Design** link and the user exports there (small fee from their balance, shown in the result).
 
 - **Template first** when one fits: fill its values (the tool's description lists every template and its values) — short words, the brand colour as hex. Templates keep their own shape (social-hook is 9:16, the rest 16:9).
-- **Layers** for anything custom (or on top of a template): text, shapes, photos and videos. Positions and sizes are fractions of the frame, measured at the layer's centre (x 0.5, y 0.5 = middle); the first layer is at the back. Give each layer an entrance (fade, slide up, slide left, scale pop, rotate, 3D flip), optionally an exit (fade out) and a loop (pulse, float) for the one thing that should keep moving.
-- Good motion design is simple: one idea per screen, big readable text, 2–3 colours, things entering one after another (stagger the start times by about 0.2–0.4 s), and a calm last second.
+- **Layers** for anything custom (or on top of a template): text, shapes, photos and videos. Positions and sizes are fractions of the frame, measured at the layer's centre (x 0.5, y 0.5 = middle); the first layer is at the back. Up to 20 layers; 1–60 seconds long.
+- Reveal things one after another (about 0.2–0.4 s apart), keep entrances smooth (fade in, slide up), loop at most one thing, and end on a calm, still last second.
 - Use the user's own images through "generation:<id>" or an upload link, exactly like other files.
 - Changes? Call `create_motion_design` again with the whole new version.
 
-## 6. Templates
+Details, layouts and examples: [motion graphics](references/craft/motion-graphics.md).
 
-Templates are ready-made looks by creators: the user adds their photo and gets that look; video templates rebuild a whole edited video step by step. Use `search_templates` / `get_template` to find one and explain what it needs, then give the user the template link — templates are used on pyplex.com. Template prompts are private; never ask for or guess them.
+## 7. Templates
 
-## 7. Account questions
+Templates are ready-made looks by creators: the user adds their photo and gets that look; video templates rebuild a whole edited video step by step. Use `search_templates` / `get_template` to find one and explain what it needs, then give the user the template link — templates are used on pyplex.com. Template prompts are private; never ask for or guess them. To help a creator build a video template, see [video-template](references/workflows/video-template.md).
+
+## 8. Account questions
 
 - Balance → `get_balance` (shows a wallet card with Add funds).
 - "What did I make?" / reuse something → `list_my_generations`, then `generation:<id>`.
 - How Pyplex works, pricing, refunds, payouts → `read_docs` (page list without arguments).
 - Creators and earnings → [references/creators.md](references/creators.md).
 
-## 8. When something goes wrong
+## 9. When something goes wrong
 
 | What you see | What to do |
 | --- | --- |

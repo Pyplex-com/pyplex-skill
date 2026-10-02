@@ -21,6 +21,8 @@ Talk in your own words. Your assistant picks the model, writes the prompt and sh
 | *"Put a red sports car behind me in this photo"* | Your photo is edited with a top photo model (for example Seedream 5.0 Pro or Nano Banana Pro) |
 | *"Now make a 5-second video of me opening the door"* | That photo becomes a video (for example Seedance 2.5) |
 | *"Cut my last three clips into a 15-second Reel with music"* | You get an **Open in Editor** link — everything is already on the timeline in the Pyplex video editor |
+| *"Make a 20-second Reel for my café"* | Your assistant plans it like a professional editor — hook, shots, music, text, transitions — shows the total price, then builds it shot by shot |
+| *"Make a video like this one, but with me in it"* | It breaks the reference down (shots, pace, transitions, text, music) and rebuilds it with your photo |
 | *"Make an animated title card for my shop"* | It opens, ready to adjust, in **Pyplex Motion Design** |
 | *"Make a 30-second upbeat track for my product video"* | Music or a voice-over from an audio model |
 
@@ -90,6 +92,8 @@ You sign in once, when you add it — the app stays connected.
 | Path | What it is |
 | --- | --- |
 | [`skills/pyplex/`](skills/pyplex) | The skill: which model fits which job, how to write prompts, uploads, chaining a photo into a video, editing clips, motion graphics, and the price-and-yes rule |
+| [`skills/pyplex/references/craft/`](skills/pyplex/references/craft) | How good videos are made: story and hooks, shots and camera moves, pacing and cuts, transitions, text and captions, music and sound, a consistent look, motion graphics, and a final check |
+| [`skills/pyplex/references/workflows/`](skills/pyplex/references/workflows) | Step-by-step playbooks: Reels, product ads, "a video like this one", photo to video, short stories, music videos, explainers, slideshows and video templates |
 | `.mcp.json`, `mcp.json` | The Pyplex connector (MCP server at `https://pyplex.com/api/mcp/account`) |
 | `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`, `.agents/`, `plugin.json` | Plugin manifests for each app |
 
