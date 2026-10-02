@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "pyplex",
+  "description": "Make images, videos, music and voice with Pyplex's 900+ AI models from chat — model picked, prompt written, exact price shown, and nothing charged without your yes.",
+  "version": "1.2.4",
+  "author": {
+    "name": "Pyplex",
+    "url": "https://pyplex.com"
+  },
+  "homepage": "https://pyplex.com/docs/ai-assistants",
+  "license": "Apache-2.0"
+}

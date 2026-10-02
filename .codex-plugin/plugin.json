@@ -1,0 +1,33 @@
+{
+  "name": "pyplex",
+  "description": "Make images, videos, music and voice with Pyplex's 900+ AI models from chat — exact price first, your yes before every generation.",
+  "version": "1.2.4",
+  "author": {
+    "name": "Pyplex",
+    "url": "https://pyplex.com"
+  },
+  "homepage": "https://pyplex.com/docs/ai-assistants",
+  "license": "Apache-2.0",
+  "keywords": [
+    "pyplex",
+    "image",
+    "video",
+    "audio",
+    "ai-generation",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Pyplex",
+    "shortDescription": "AI images, videos and audio from chat",
+    "longDescription": "Connect Pyplex and ask for what you want: edit your photo, turn it into a video, make music or a voice-over. The assistant picks one of 900+ models, writes the prompt, shows the exact price and starts only after you agree. Results stay in your Pyplex Library.",
+    "developerName": "Pyplex",
+    "category": "Creativity",
+    "websiteURL": "https://pyplex.com",
+    "defaultPrompt": [
+      "Put a red sports car behind me in this photo",
+      "Turn my last Pyplex image into a 5 second video",
+      "Make a 30 second upbeat background track for a product video"
+    ]
+  }
+}

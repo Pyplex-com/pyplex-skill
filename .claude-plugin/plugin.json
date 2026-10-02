@@ -1,0 +1,21 @@
+{
+  "name": "pyplex",
+  "displayName": "Pyplex",
+  "version": "1.2.4",
+  "description": "Make images, videos, music and voice with Pyplex's 900+ AI models from a conversation: Claude picks the model, writes the prompt, shows the exact price, and starts only after you say yes. Results show up right in the chat.",
+  "author": {
+    "name": "Pyplex",
+    "url": "https://pyplex.com"
+  },
+  "homepage": "https://pyplex.com/docs/ai-assistants",
+  "license": "Apache-2.0",
+  "keywords": [
+    "pyplex",
+    "image",
+    "video",
+    "audio",
+    "ai-generation",
+    "templates",
+    "mcp"
+  ]
+}

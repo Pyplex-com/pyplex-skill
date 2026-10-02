@@ -1,0 +1,22 @@
+{
+  "$schema": "https://cursor.com/schemas/cursor-plugin/plugin.json",
+  "name": "pyplex",
+  "displayName": "Pyplex",
+  "description": "Make images, videos, music and voice with Pyplex's 900+ AI models from chat — exact price first, your yes before every generation.",
+  "version": "1.2.4",
+  "author": {
+    "name": "Pyplex"
+  },
+  "publisher": "Pyplex",
+  "homepage": "https://pyplex.com/docs/ai-assistants",
+  "license": "Apache-2.0",
+  "keywords": [
+    "pyplex",
+    "image",
+    "video",
+    "audio",
+    "ai-generation",
+    "mcp"
+  ],
+  "skills": "./skills/"
+}

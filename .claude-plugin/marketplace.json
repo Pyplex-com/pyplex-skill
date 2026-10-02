@@ -1,0 +1,17 @@
+{
+  "name": "pyplex",
+  "owner": {
+    "name": "Pyplex",
+    "url": "https://pyplex.com"
+  },
+  "description": "Pyplex for AI assistants: the Pyplex connector plus the skill that teaches your assistant to make images, videos and audio on Pyplex.",
+  "plugins": [
+    {
+      "name": "pyplex",
+      "source": "./",
+      "description": "Pyplex connector + skill: make images, videos, music and voice with 900+ AI models from chat, with the price shown and your OK before every generation.",
+      "homepage": "https://pyplex.com/docs/ai-assistants",
+      "license": "Apache-2.0"
+    }
+  ]
+}

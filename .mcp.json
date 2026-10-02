@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "pyplex": {
+      "type": "http",
+      "url": "https://pyplex.com/api/mcp/account"
+    }
+  }
+}
