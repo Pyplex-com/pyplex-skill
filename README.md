@@ -1,30 +1,57 @@
+<div align="center">
+
 # Pyplex for AI assistants
 
-Make images, videos, music and voice with [Pyplex](https://pyplex.com)'s 900+ AI models straight from a conversation with Claude, ChatGPT, Cursor, Codex and other assistants.
+**Make images, videos, music and voice with 900+ AI models — right from your chat with Claude, ChatGPT, Codex, Cursor and other assistants.**
 
-Ask in your own words — *"put a red sports car behind me in this photo"*, then *"now make a video of me opening the door and sitting inside"*. Your assistant picks the right model, writes the prompt, shows you the **exact price**, and starts only after you say yes. The result appears in the chat (in apps that show Pyplex's card) and is saved in your Pyplex Library.
+[Website](https://pyplex.com) · [Docs](https://pyplex.com/docs/ai-assistants) · [Download the plugin (zip)](https://pyplex.com/downloads/pyplex-plugin.zip)
 
-This plugin contains:
+![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue) ![MCP connector](https://img.shields.io/badge/MCP-connector-10b981) ![Price shown first](https://img.shields.io/badge/price-shown%20before%20you%20pay-6366f1)
 
-- **The Pyplex connector** (`.mcp.json`) — Pyplex's MCP server at `https://pyplex.com/api/mcp/account` (the same address in every app).
-- **The `pyplex` skill** (`skills/pyplex/`) — teaches your assistant the Pyplex workflow: picking models, writing prompts, uploads, chaining results, editing clips into one video (opens in the Pyplex editor), motion graphics (opens in Pyplex Motion Design), prices and confirmation.
+</div>
+
+---
+
+## What you can ask
+
+Talk in your own words. Your assistant picks the model, writes the prompt and shows the price first.
+
+| You say | What happens |
+| --- | --- |
+| *"Put a red sports car behind me in this photo"* | Your photo is edited with a top photo model (for example Seedream 5.0 Pro or Nano Banana Pro) |
+| *"Now make a 5-second video of me opening the door"* | That photo becomes a video (for example Seedance 2.5) |
+| *"Cut my last three clips into a 15-second Reel with music"* | You get an **Open in Editor** link — everything is already on the timeline in the Pyplex video editor |
+| *"Make an animated title card for my shop"* | It opens, ready to adjust, in **Pyplex Motion Design** |
+| *"Make a 30-second upbeat track for my product video"* | Music or a voice-over from an audio model |
+
+## How it works
+
+1. **Ask** for what you want.
+2. Your assistant **picks a model** and writes the prompt for you.
+3. You see the **exact price** — nothing is charged yet.
+4. Say **yes** (or press **Generate** on the Pyplex card).
+5. The result appears **in the chat** and is saved in your **Pyplex Library**.
 
 ## Install
 
-Source: [github.com/Pyplex-com/pyplex-skill](https://github.com/Pyplex-com/pyplex-skill) · Download: [pyplex.com/downloads/pyplex-plugin.zip](https://pyplex.com/downloads/pyplex-plugin.zip)
-
-**Claude Code** — straight from GitHub:
+### Claude Code — straight from GitHub
 
 ```bash
 claude plugin marketplace add Pyplex-com/pyplex-skill
 claude plugin install pyplex@pyplex
 ```
 
-Run `/mcp` and sign in to Pyplex when asked. (From the zip instead: unzip it to a folder and use `claude plugin marketplace add ./pyplex-plugin`.)
+Then run `/mcp` and sign in to Pyplex when asked.
 
-**Claude (web, desktop)** — Customize → Plugins → Add → Upload plugin, and pick `pyplex-plugin.zip`. Then open the plugin's **Connectors** tab and connect Pyplex.
+### Claude (web and desktop)
 
-**Codex** — unzip it to a folder, then:
+1. Download [pyplex-plugin.zip](https://pyplex.com/downloads/pyplex-plugin.zip).
+2. **Customize → Plugins → Add → Upload plugin**, and pick the zip.
+3. Open the plugin's **Connectors** tab and connect Pyplex.
+
+### Codex
+
+Unzip the plugin to a folder, then:
 
 ```bash
 codex plugin marketplace add ./pyplex-plugin
@@ -32,19 +59,39 @@ codex plugin add pyplex@pyplex
 codex mcp login pyplex
 ```
 
-Or only the connector: `codex mcp add pyplex --url https://pyplex.com/api/mcp/account` then `codex mcp login pyplex`.
+### Cursor, OpenCode and other agents with skills
 
-**Other agents that support skills (Cursor, OpenCode and more)** — copy the `skills/pyplex` folder (from this repository or the zip) into your agent's skills folder. Add the connector in your app as an HTTP MCP server: `https://pyplex.com/api/mcp/account`, and sign in to Pyplex once when the app asks.
+Copy the [`skills/pyplex`](skills/pyplex) folder into your agent's skills folder, then add the connector below.
 
-**Only the connector** — Claude: Customize → Connectors → Add custom connector → URL `https://pyplex.com/api/mcp/account`, Authentication **Sign in now**, OAuth client **Register automatically**, request headers empty → Add → sign in to Pyplex → **Allow** (once — it stays connected). Claude Code: `claude mcp add --transport http pyplex https://pyplex.com/api/mcp/account`. ChatGPT: the same address as a custom connector.
+### Only the connector
 
-## How paying works
+Every app uses the same address: `https://pyplex.com/api/mcp/account`
 
-- You sign in to Pyplex and press **Allow** once, when you add the connector; the app stays connected. You can disconnect any time from your Pyplex Dashboard → Connected apps.
+| App | How to add it |
+| --- | --- |
+| Claude | Customize → Connectors → Add custom connector → the address above, Authentication **Sign in now**, OAuth client **Register automatically**, no request headers → Add → sign in to Pyplex → **Allow** |
+| Claude Code | `claude mcp add --transport http pyplex https://pyplex.com/api/mcp/account` |
+| ChatGPT | Add a custom connector with the address above |
+| Codex | `codex mcp add pyplex --url https://pyplex.com/api/mcp/account`, then `codex mcp login pyplex` |
+| Cursor, VS Code, other MCP apps | Add an HTTP MCP server with the address above |
+
+You sign in once, when you add it — the app stays connected.
+
+## Paying and safety
+
+- You sign in to Pyplex and press **Allow** once, when you add the connector. You can disconnect any time from your Pyplex **Dashboard → Connected apps**.
 - Looking up models, prices, templates and docs is free.
-- Every generation is two steps: a free price check, then your **yes** (or the **Generate** button on the Pyplex card). Nothing is charged without it.
+- Every generation is two steps: a free price check, then your **yes**. Nothing is charged without it.
 - If your balance is low, you get a link to add money on Pyplex (minimum top-up $10). Failed generations are refunded automatically.
-- Putting clips together into one video is free: you get an **Open in Editor** link, and exporting the finished video in the Pyplex editor costs a small fee from your balance.
+- Putting clips together into one video is free. Exporting the finished video in the Pyplex editor costs a small fee from your balance, shown before you export.
+
+## What's inside
+
+| Path | What it is |
+| --- | --- |
+| [`skills/pyplex/`](skills/pyplex) | The skill: which model fits which job, how to write prompts, uploads, chaining a photo into a video, editing clips, motion graphics, and the price-and-yes rule |
+| `.mcp.json`, `mcp.json` | The Pyplex connector (MCP server at `https://pyplex.com/api/mcp/account`) |
+| `.claude-plugin/`, `.codex-plugin/`, `.cursor-plugin/`, `.agents/`, `plugin.json` | Plugin manifests for each app |
 
 ## Data
 
