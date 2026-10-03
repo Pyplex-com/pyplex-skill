@@ -65,6 +65,87 @@ A loop keeps moving the whole time. Loop at most one thing: `pulse` on a call-to
 - Two or three colours plus white. Text over a photo needs a dark shape or a dimmed photo behind it.
 - Align things: centre everything, or give a left-aligned stack the same `x` and `align` "left".
 
+## Real motion: keyframes, lines, counters, camera, sound
+
+Entrances and exits cover most designs. When the idea needs something to **travel**, **draw**, **count** or the view to **move**, use these. A design can have up to 120 layers.
+
+- **`keyframes`** on any layer: a list of moments, each with a `time` in seconds from the layer's own start and the values it reaches then — `x`, `y` (fractions of the frame), `scale` (1 = normal), `rotation` (degrees), `opacity` (0–1). `easing` says how it moves *into* that key: `ease-in-out` (default, calm), `ease-out` (fast then settles — for arrivals), `ease-in` (for leaving), `smooth`, `snappy` (quick, punchy), `linear` (steady — for scrolling or rotating), `hold` (jumps). Give the first key at `time` 0 with the starting values. Your keyframes replace the entrance/exit for the same value, so for a moving layer use `enter` "none" or animate a different value.
+- **`path`** layer — a line or outline from `points` (`[x, y]` pairs, fractions of the frame): chart lines, arrows, underlines, routes on a map, a circle drawn around something. `stroke` colour, `stroke_width` in pixels, `closed` true with a `fill` for a filled shape. `draw` makes the line draw itself: `{ "start": 0.4, "duration": 1.2 }`.
+- **`count`** on a text layer — a number that counts: `{ "from": 0, "to": 12500, "duration": 1.5, "suffix": "+ users" }`. Also `prefix` ("$", "₹"), `decimals`, `start`. Put the final value in `text` too.
+- **`camera`** — moves the whole view: a list of `{ time, x, y, zoom }` from the design's start. `x`/`y` is the point at the centre of the screen, `zoom` 1 shows the whole frame, 2 is twice as close. A slow push-in (zoom 1 → 1.08 over the whole design) adds life to a still layout; a pan from one side of a wide layout to the other walks through steps. One camera move at a time, never fast.
+- **`audio`** — music or sound effects: `{ "source": "generation:<id>", "start": 0, "volume": 0.8, "fade_out": 1 }`, up to 5. Make the music first (see [sound](sound.md)), then line the reveals up with its beats.
+
+Keep it restrained: one hero motion per moment, everything else still. A counter, a drawing line and a camera move all at once is noise.
+
+A growth stat with a counting number and a chart line that draws itself:
+
+```json
+{
+  "title": "12,500 users",
+  "aspect_ratio": "9:16",
+  "duration": 6,
+  "background": "#0B0F19",
+  "layers": [
+    { "type": "text", "text": "12,500+", "size": "huge", "weight": "black", "color": "#FFFFFF", "y": 0.3, "enter": "fade-in",
+      "count": { "from": 0, "to": 12500, "duration": 1.8, "suffix": "+" } },
+    { "type": "text", "text": "people joined this year", "size": "medium", "weight": "regular", "color": "#AAB4C8", "y": 0.38, "start": 0.6, "enter": "slide-up-in" },
+    { "type": "path", "points": [[0.12, 0.72], [0.3, 0.66], [0.48, 0.68], [0.66, 0.56], [0.88, 0.46]], "stroke": "#19A877", "stroke_width": 10,
+      "start": 0.8, "enter": "none", "draw": { "start": 0, "duration": 1.6 } },
+    { "type": "shape", "shape": "ellipse", "x": 0.88, "y": 0.46, "width": 0.04, "height": 0.0225, "color": "#19A877", "start": 2.4, "enter": "scale-pop" }
+  ],
+  "camera": [{ "time": 0, "zoom": 1 }, { "time": 6, "zoom": 1.06, "easing": "linear" }],
+  "audio": [{ "source": "generation:<music-id>", "volume": 0.7, "fade_out": 1 }]
+}
+```
+
+A badge that flies in along a path of keyframes and settles:
+
+```json
+{ "title": "New badge", "duration": 4, "layers": [
+{ "type": "text", "text": "NEW", "size": "medium", "weight": "black", "background": "#FF5A1F", "enter": "none",
+  "keyframes": [
+    { "time": 0, "x": 1.2, "y": 0.2, "rotation": 20, "opacity": 0 },
+    { "time": 0.6, "x": 0.78, "y": 0.24, "rotation": -6, "opacity": 1, "easing": "ease-out" },
+    { "time": 0.9, "rotation": 0, "easing": "smooth" }
+  ] }
+] }
+```
+
+## Inside a video
+
+When the graphic belongs in a video you are editing, put it in `create_video_edit`'s `motion` list instead of making a separate design — the user gets one project with the clips, music and graphics together, and nothing to stitch by hand.
+
+- Each item: `start` (seconds on the final video) and `design` — exactly what `create_motion_design` takes (layers, keyframes, path, count, camera, template), minus `aspect_ratio` (it takes the video's shape) and `audio` (music goes in the edit's `audio`).
+- **No `background`** = the design floats over the video: lower thirds, stickers, counters, captions with motion, a chart over a shot.
+- **A `background` colour** = it covers the screen for its `duration`: title cards, chapter cards, end screens. Time the clips so the story pauses there, or let the card sit over a clip you don't need to see.
+- Templates work when their shape matches the video (`social-hook` for 9:16; the rest for 16:9).
+- One design at a time (they can't overlap). Things that appear together — a headline and its number — go in one design.
+
+A Reel with a counting stat over the first shot and an end card:
+
+```json
+{
+  "title": "Café Reel",
+  "aspect_ratio": "9:16",
+  "clips": [
+    { "source": "generation:<clip-1>", "duration": 4, "volume": 0, "transition": { "type": "zoomBlur", "duration": 0.3 } },
+    { "source": "generation:<clip-2>", "duration": 4, "volume": 0 }
+  ],
+  "audio": [{ "source": "generation:<music-id>", "volume": 0.7, "fade_out": 1 }],
+  "motion": [
+    { "start": 0.5, "design": { "duration": 3, "layers": [
+      { "type": "text", "text": "1,200+", "size": "huge", "weight": "black", "y": 0.18,
+        "count": { "from": 0, "to": 1200, "duration": 1.2, "suffix": "+" } },
+      { "type": "text", "text": "cups a week", "size": "medium", "y": 0.25, "start": 0.4, "enter": "slide-up-in" }
+    ] } },
+    { "start": 6, "design": { "duration": 2, "background": "#19A877", "layers": [
+      { "type": "text", "text": "PYPLEX Café", "size": "huge", "weight": "black", "y": 0.45, "enter": "scale-pop" },
+      { "type": "text", "text": "Open daily · 8 am", "size": "medium", "weight": "regular", "y": 0.56, "start": 0.3, "enter": "fade-in" }
+    ] } }
+  ]
+}
+```
+
 ## Examples
 
 A stat card for a Reel:

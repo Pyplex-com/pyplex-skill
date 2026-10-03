@@ -29,4 +29,4 @@ You usually can't see what's in the uploaded photos. If you can't, keep the uplo
 
 - Bring one or two key photos to life with `bytedance/seedance-2.5/image-to-video` and a subtle movement.
 - Sharpen a blurry old photo with `clarity-ai/crystal-upscaler`.
-- An animated title card from `create_motion_design` (`kinetic-title` or `logo-reveal`); the user exports it and adds it at the start in the editor.
+- An animated title card at the start, in the edit's `motion` (`kinetic-title` or `logo-reveal` for 16:9, or layers with a `background`) — it lands on the same timeline.

@@ -34,7 +34,7 @@ Animate three to five scenes with `bytedance/seedance-2.5/image-to-video`: a slo
 - 9:16 or 4:5 for social media, 16:9 for YouTube and websites.
 - Music: modern and confident, 100–124 BPM, cut every 2 or 4 beats. `zoomBlur` into the hero shot, hard cuts elsewhere, `dipToBlack` or `overexposure` into the final shot.
 - Text: the promise (`large`), two or three short benefits (`medium`), and the offer and call to action at the end in the brand colour.
-- The last shot: the hero image with `motion` "zoom_in" for 3 s, holding the call to action. For an animated logo, make it separately with `create_motion_design` (`logo-reveal` or `end-screen`) — the user exports it and adds it at the end in the editor.
+- The last shot: the hero image with `motion` "zoom_in" for 3 s, holding the call to action. For an animated logo or end card, add it to the same edit's `motion` at the end (the `end-screen` or `logo-reveal` template when the video is 16:9, or layers with a `background`) — one link, nothing to stitch by hand.
 
 ## Ad rules
 

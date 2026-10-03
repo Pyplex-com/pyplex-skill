@@ -24,7 +24,7 @@ Each line gets one picture that shows what it says — never a generic backgroun
 
 - AI images with a slow `zoom_in` — the cheapest, calmest option — all in one style ("clean flat illustration, soft pastel colours" or "real photos, bright natural light").
 - AI clips for the steps that need motion: hands pouring, a machine working.
-- Cards for numbers, steps and key words, made with `create_motion_design` ([motion graphics](../craft/motion-graphics.md)); they're exported separately and added in the editor.
+- Cards for numbers, steps and key words: designs in the edit's `motion` list, so they land on the same timeline ([motion graphics](../craft/motion-graphics.md#inside-a-video)). A counting number (`count`) or a line that draws itself (`path` + `draw`) shows a stat better than still text.
 - For steps, keep the same "stage" (the same desk, the same kitchen) so the viewer watches the change, not the setting.
 
 ## 4. Voice, captions, music

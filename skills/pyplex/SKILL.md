@@ -4,7 +4,7 @@ description: Make images, videos, music and voice with Pyplex (pyplex.com) right
 license: Apache-2.0
 metadata:
   author: Pyplex
-  version: "1.3.1"
+  version: "1.3.2"
   homepage: https://pyplex.com
 ---
 
@@ -90,22 +90,25 @@ When the user wants clips cut together — a reel, a slideshow, an ad, a story �
 
 1. **Get the clips first.** New ones go through the money rule (one yes for the planned list). Earlier results: "generation:<id>". The user's own files: an upload link — "upload:<upload_id>" means all its files, in order.
 2. **Plan it like an editor** (section 4). Frame shape for where it will be posted (9:16 for Reels, TikTok and Shorts; 16:9 for YouTube; 1:1 or 4:5 for feeds — "auto" copies the first clip).
-3. **Call** `create_video_edit`: clips in play order (source, duration, trim start, fit, slow zoom, volume, transition into the next), texts (start time on the final video, duration, position, size, colour, style, animation) and audio (start, trim, volume, fades). Times are seconds.
+3. **Call** `create_video_edit`: clips in play order (source, duration, trim start, fit, slow zoom, volume, transition into the next), texts (start time on the final video, duration, position, size, colour, style, animation), audio (start, trim, volume, fades) and **motion** — animated graphics on the same timeline (below). Times are seconds.
 4. **Hand over the link.** The Pyplex card shows the clips and an Open in Editor button; otherwise give the link from the result. It opens only for the user's own Pyplex account and lasts 30 days.
 5. **Changes?** Call `create_video_edit` again with the whole new version — each call makes a new link. Don't ask the user to rebuild it by hand.
 
-**Limits:** up to 30 clips, 30 texts (150 characters each) and 5 audio tracks; 5 minutes in total; a photo stays 3 seconds unless you set its `duration`; transitions last 0.2–2 seconds.
+**Motion graphics inside the video.** When a video needs an animated title, a lower third, a counting stat, a chart line, a sticker or an end card, put it in the edit's `motion` list — `{ "start": <second on the video>, "design": { …exactly what create_motion_design takes… } }` — so everything is in ONE project and ONE link. Without a `background` the design floats over the video (an overlay); with a background colour it fills the screen (a title or end card). The design takes the video's shape (leave out its `aspect_ratio`; a template must match the shape), music stays in the edit's `audio`, and designs play one at a time — things that appear together go in one design. Details and an example: [motion graphics](references/craft/motion-graphics.md#inside-a-video).
+
+**Limits:** up to 30 clips, 30 texts (150 characters each), 5 audio tracks and 10 motion designs; 5 minutes in total; a photo stays 3 seconds unless you set its `duration`; transitions last 0.2–2 seconds.
 
 Quick tips: a slow zoom (`zoom_in` / `zoom_out`) makes photos feel alive; clips of a different shape look best with `fit` "contain" and the blurred background; set AI clips' `volume` to 0 when music plays; pick one or two transition styles and keep them short ([transitions](references/craft/transitions.md)); short text, timed to the picture ([text](references/craft/text.md)).
 
 ## 6. Motion graphics
 
-For animated graphics — a title card, product ad, lower third, logo reveal, social-media hook, stat or end screen — use `create_motion_design`. Free; it returns an **Open in Motion Design** link and the user exports there (small fee from their balance, shown in the result).
+For animated graphics on their own — a title card, product ad, lower third, logo reveal, social-media hook, stat or end screen — use `create_motion_design`. **If the graphic belongs in a video you're editing, don't make it separately: put the same design in `create_video_edit`'s `motion` (section 5).** Free; it returns an **Open in Motion Design** link and the user exports there (small fee from their balance, shown in the result).
 
 - **Template first** when one fits: fill its values (the tool's description lists every template and its values) — short words, the brand colour as hex. Templates keep their own shape (social-hook is 9:16, the rest 16:9).
-- **Layers** for anything custom (or on top of a template): text, shapes, photos and videos. Positions and sizes are fractions of the frame, measured at the layer's centre (x 0.5, y 0.5 = middle); the first layer is at the back. Up to 20 layers; 1–60 seconds long.
+- **Layers** for anything custom (or on top of a template): text, shapes, lines (`path`), photos and videos. Positions and sizes are fractions of the frame, measured at the layer's centre (x 0.5, y 0.5 = middle); the first layer is at the back. Up to 120 layers; 1–60 seconds long.
 - Reveal things one after another (about 0.2–0.4 s apart), keep entrances smooth (fade in, slide up), loop at most one thing, and end on a calm, still last second.
 - Use the user's own images through "generation:<id>" or an upload link, exactly like other files.
+- Real motion when the idea needs it: `keyframes` (move, scale, rotate, fade), a `path` line that draws itself, a counting number (`count`), a `camera` push or pan, and music (`audio`).
 - Changes? Call `create_motion_design` again with the whole new version.
 
 Details, layouts and examples: [motion graphics](references/craft/motion-graphics.md).
