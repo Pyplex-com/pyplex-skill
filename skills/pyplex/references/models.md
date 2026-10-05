@@ -44,7 +44,7 @@ Match the **task** first, then quality vs. speed:
 | Upscale a video | `clarity-ai/crystal-video-upscaler` |
 | Remove a video's background | `hosted/video-background-remover` |
 
-Video price depends on length and resolution — quote before promising anything. Start and end frames: Seedance 2.5 and Veo 3.1 take a `last_image`, Kling takes an `end_image`; check `get_model`.
+Video price depends on length and resolution — quote before promising anything. Models that take a video or audio file (upscale, lipsync, voice change, video edit) price by that file's length: `get_price` returns no price for them, so `quote_generation` with the user's file to get the exact one. Start and end frames: Seedance 2.5 and Veo 3.1 take a `last_image`, Kling takes an `end_image`; check `get_model`.
 
 ## Audio
 

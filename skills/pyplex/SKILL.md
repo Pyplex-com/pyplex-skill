@@ -4,7 +4,7 @@ description: Make images, videos, music and voice with Pyplex (pyplex.com) right
 license: Apache-2.0
 metadata:
   author: Pyplex
-  version: "1.3.2"
+  version: "1.3.3"
   homepage: https://pyplex.com
 ---
 
@@ -138,6 +138,8 @@ Templates are ready-made looks by creators: the user adds their photo and gets t
 | Upload link has no file yet | Ask the user to finish on the upload page; `check_upload` with `wait_seconds` |
 | Edit link says "wasn't found" | They're signed in to a different Pyplex account in that browser — sign in with the one connected here |
 | Editor says a file couldn't be downloaded | Uploaded files are kept 30 days; make the edit again (re-upload if needed) |
+| `get_price` gives no price (`price_usd: null`) | The model prices by the length of the uploaded file — `quote_generation` with the file shows the exact price |
+| "Where is my edited project?" | Signed in, the editor saves it to their Pyplex account: Library → Projects (opens on any device). Files they added in the editor are kept 3 days after upload; edits stay |
 | `create_video_edit` / `create_motion_design` lists problems | Fix exactly those fields and call it again |
 
 ## Never
